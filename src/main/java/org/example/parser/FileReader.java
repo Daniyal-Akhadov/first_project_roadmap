@@ -1,18 +1,20 @@
 package org.example.parser;
 
-import org.example.utils.ImmutableArray;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public final class Dictionary {
+public final class FileReader {
 
-    private static final String FILE_PATH = "src/main/resources/Words.txt";
+    private final String FILE_PATH ;
 
-    public ImmutableArray<String> getWords() throws FileNotFoundException {
+    public FileReader(String filePath) {
+        FILE_PATH = filePath;
+    }
+
+    public List<String> getWords() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(FILE_PATH));
         List<String> list = new ArrayList<>();
 
@@ -20,9 +22,7 @@ public final class Dictionary {
             list.add(scanner.next());
         }
 
-        String[] array = list.toArray(new String[0]);
         scanner.close();
-
-        return new ImmutableArray<>(array);
+        return list;
     }
 }
